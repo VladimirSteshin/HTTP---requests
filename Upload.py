@@ -15,7 +15,10 @@ class YaUploader:
         response = requests.get(url, headers=headers, params=params)
         upload_link = response.json().get('href')
         work = requests.put(upload_link, data=open('test.txt', 'r'), params=params, headers=headers)
-        return work
+        if work.status_code == 201:
+            print('Done')
+        else:
+            print(f'Check the ErrorCode # {work.status_code}')
 
 
 if __name__ == '__main__':
